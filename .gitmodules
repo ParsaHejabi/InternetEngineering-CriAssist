@@ -1,0 +1,6 @@
+[submodule "criassist-mobile"]
+	path = criassist-mobile
+	url = git@gitlab.com:criassist/criassist-mobile.git
+[submodule "criassist-frontend"]
+	path = criassist-frontend
+	url = git@gitlab.com:criassist/criassist-frontend.git
