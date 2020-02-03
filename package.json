@@ -1,0 +1,41 @@
+{
+  "name": "criassist",
+  "version": "1.0.0",
+  "description": "An application that can be used in case of emergency situations.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "heroku-postbuild": "cd criassist-frontend/criassist-frontend/ && yarn install && yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/criassist/criassist.git"
+  },
+  "keywords": [
+    "Crisis",
+    "Assistant",
+    "Node.js",
+    "React",
+    "MongoDB"
+  ],
+  "author": "Parsa Hejabi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/criassist/criassist/issues"
+  },
+  "homepage": "https://gitlab.com/criassist/criassist#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.6.0",
+    "mongodb": "^3.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "12.14.1"
+  }
+}
