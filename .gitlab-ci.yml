@@ -1,9 +1,5 @@
 image: node:latest
 
-stages:
-  - production
-
 production:
-  image: node:latest
   script:
     - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
