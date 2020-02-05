@@ -11,10 +11,7 @@ const {
   // geometryCollection,
   area
 } = require("../schema/helper/areaData.json");
-const {
-  form1,
-  form2
-} = require("../schema/helper/formData.json");
+const { form1, form2 } = require("../schema/helper/formData.json");
 
 const GeoJSONTypes = {
   POINT: "Point",
@@ -47,7 +44,7 @@ module.exports = {
     return area;
   },
   forms: () => {
-    return form1;
+    return [form1, form2];
   },
   // forms: () => {
   //   return Form.find()
@@ -84,7 +81,7 @@ module.exports = {
     };
     polygons.push(polygon);
     return polygon;
-  },
+  }
   // createForm: args => {
   //   const form = new Form({
   //     title: args.formInput.title

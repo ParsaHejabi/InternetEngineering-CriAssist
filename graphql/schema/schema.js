@@ -61,7 +61,9 @@ module.exports = new graphql.GraphQLSchema({
         type: formFieldObject.FormField
       },
       forms: {
-        type: graphql.GraphQLNonNull(formObject)
+        type: graphql.GraphQLNonNull(
+          new graphql.GraphQLList(graphql.GraphQLNonNull(formObject))
+        )
       }
     })
   })
