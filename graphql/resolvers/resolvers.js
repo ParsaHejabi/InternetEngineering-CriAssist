@@ -41,7 +41,11 @@ module.exports = {
     return featureCollection;
   },
   areas: () => {
-    return area;
+    return [area];
+  },
+  createArea: args => {
+    console.log(args.areaInput.geojson);
+    return args;
   },
   forms: () => {
     return [form1, form2];

@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const graphqlGeoJSON = require("./geoJSON");
 
-module.exports = new graphql.GraphQLObjectType({
+const area = new graphql.GraphQLObjectType({
   name: "Area",
   fields: () => ({
     _id: {
@@ -12,7 +12,22 @@ module.exports = new graphql.GraphQLObjectType({
       description: "Name of the area the GeoJSON representing."
     },
     geojson: {
-      type: new graphql.GraphQLNonNull(graphqlGeoJSON.FeatureCollectionObject)
+      type: new graphql.GraphQLNonNull(graphqlGeoJSON.GeoJSON.FeatureCollectionObject)
     }
   })
 });
+
+const areaInput = new graphql.GraphQLInputObjectType({
+  name: "AreaInput",
+  fields: () => ({
+    name: {
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString),
+      description: "Name of the area the GeoJSON representing."
+    },
+    geojson: {
+      type: new graphql.GraphQLNonNull(graphqlGeoJSON.featureCollectionInput)
+    }
+  })
+})
+
+module.exports = {area, areaInput};

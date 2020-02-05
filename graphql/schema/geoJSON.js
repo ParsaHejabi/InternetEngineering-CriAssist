@@ -7,7 +7,8 @@ const {
   GraphQLScalarType: ScalarType,
   GraphQLInterfaceType: InterfaceType,
   GraphQLUnionType: UnionType,
-  GraphQLNonNull: NonNull
+  GraphQLNonNull: NonNull,
+  GraphQLInputObjectType: InputType
 } = require("graphql");
 
 const GeoJSON = {
@@ -239,7 +240,7 @@ function coerceCoordinates(value) {
 }
 
 function parseCoordinates(valueAST) {
-  return valueAST.value;
+  return valueAST.values;
 }
 
 function coerceObject(value) {
@@ -250,4 +251,31 @@ function parseObject(valueAST) {
   return JSON.stringify(valueAST.value);
 }
 
-module.exports = GeoJSON;
+const featureCollectionInput = new InputType({
+  name: "FeatureCollectionInput",
+  fields: () => ({
+    type: { type: new NonNull(GeoJSON.TypeEnum) },
+    features: {
+      type: new NonNull(new List(new NonNull(featureInput)))
+    }
+  })
+});
+
+const featureInput = new InputType({
+  name: "FeatureInput",
+  fields: () => ({
+    type: { type: new NonNull(GeoJSON.TypeEnum) },
+    name: { type: Str },
+    geometry: { type: NonNull(geometryInterfaceInput) }
+  })
+});
+
+const geometryInterfaceInput = new InputType({
+  name: "GeometryInterfaceInput",
+  fields: () => ({
+    type: { type: new NonNull(GeoJSON.TypeEnum) },
+    coordinates: { type: NonNull(GeoJSON.CoordinatesScalar) }
+  })
+});
+
+module.exports = { GeoJSON, featureCollectionInput };

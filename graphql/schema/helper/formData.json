@@ -70,7 +70,7 @@
     },
     "form2": {
         "title": "A sample form2",
-        "id": "2",
+        "_id": "2",
         "fields": [{
                 "name": "First_Name",
                 "title": "First Name",
@@ -89,11 +89,15 @@
                 "type": "Date",
                 "options": [{
                         "label": "TimeSlot1",
-                        "value": "22/3/78"
+                        "value": {
+                            "dateValue": "22/3/78"
+                        }
                     },
                     {
                         "label": "TimeSlot2",
-                        "value": "22/11/57"
+                        "value": {
+                            "dateValue": "22/11/57"
+                        }
                     }
                 ],
                 "required": true
@@ -105,11 +109,15 @@
                 "required": false,
                 "options": [{
                         "label": "Help",
-                        "value": "Help"
+                        "value": {
+                            "textValue": "Help"
+                        }
                     },
                     {
                         "label": "Info",
-                        "value": "Information"
+                        "value": {
+                            "textValue": "Information"
+                        }
                     }
                 ]
             },
