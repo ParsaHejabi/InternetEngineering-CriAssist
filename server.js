@@ -3,12 +3,16 @@ const bodyParser = require("body-parser");
 const graphqlHTTP = require("express-graphql");
 const path = require("path");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const graphQlSchema = require("./graphql/schema/schema");
 const graphQlResolvers = require("./graphql/resolvers/resolvers");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// handle cors
+app.use(cors());
 
 // Configure graphql
 app.use(bodyParser.json());
