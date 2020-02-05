@@ -50,7 +50,7 @@ const mutationRootType = new graphql.GraphQLObjectType({
       type: area.area,
       args: {
         areaInput: {
-          type: area.areaInput
+          type: new graphql.GraphQLNonNull(area.areaInput)
         }
       }
     }
