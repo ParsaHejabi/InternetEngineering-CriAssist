@@ -1,14 +1,10 @@
 // const Form = require("../../models/form");
 const {
   point,
-  // multiPoint,
   lineString,
-  // multiLineString,
   polygon,
-  // multiPolygon,
   feature,
   featureCollection,
-  // geometryCollection,
   area
 } = require("../schema/helper/areaData.json");
 const { form1, form2 } = require("../schema/helper/formData.json");
@@ -44,7 +40,9 @@ module.exports = {
     return [area];
   },
   createArea: args => {
+    console.log(args.areaInput);
     console.log(args.areaInput.geojson);
+    console.log(args.areaInput.geojson.features[0].geometry);
     return args;
   },
   forms: () => {
@@ -62,30 +60,6 @@ module.exports = {
   //       throw err;
   //     });
   // },
-  createPoint: args => {
-    const point = {
-      type: GeoJSONTypes.POINT,
-      pointCoordinates: args.pointInput.pointCoordinates
-    };
-    points.push(point);
-    return point;
-  },
-  createLineStrings: args => {
-    const lineString = {
-      type: GeoJSONTypes.LINESTRING,
-      lineStringCoordinates: args.lineStringInput.lineStringCoordinates
-    };
-    lineStrings.push(lineString);
-    return lineString;
-  },
-  createPolygon: args => {
-    const polygon = {
-      type: GeoJSONTypes.POLYGON,
-      polygonCoordinates: args.polygonInput.polygonCoordinates
-    };
-    polygons.push(polygon);
-    return polygon;
-  }
   // createForm: args => {
   //   const form = new Form({
   //     title: args.formInput.title
