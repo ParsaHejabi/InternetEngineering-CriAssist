@@ -41,17 +41,36 @@ const formFieldOptionInput = new graphql.GraphQLInputObjectType({
     label: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     },
-    textValue: {
-      type: formFieldOptionValue.FormFieldOptionValueTextInput
-    },
-    numberValue: {
-      type: formFieldOptionValue.FormFieldOptionValueNumberInput
-    },
-    dateValue: {
-      type: formFieldOptionValue.FormFieldOptionValueDateInput
-    },
-    pointValue: {
-      type: formFieldOptionValue.FormFieldOptionValuePointInput
+    value: {
+      type: new graphql.GraphQLNonNull(
+        new graphql.GraphQLInputObjectType({
+          name: "FormFieldOptionValueInput",
+          fields: () => ({
+            textValue: {
+              type: graphql.GraphQLString
+            },
+            numberValue: {
+              type: graphql.GraphQLFloat
+            },
+            dateValue: {
+              type: graphql.GraphQLString
+            },
+            pointValue: {
+              type: new graphql.GraphQLInputObjectType({
+                name: "FormFieldOptionValuePointInput",
+                fields: () => ({
+                  lat: {
+                    type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+                  },
+                  long: {
+                    type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+                  }
+                })
+              })
+            }
+          })
+        })
+      )
     }
   })
 });

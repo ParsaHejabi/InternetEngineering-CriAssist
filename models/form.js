@@ -10,9 +10,43 @@ const formSchema = new Schema({
   fields: {
     type: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "FormField",
-        required: true
+        name: {
+          type: String,
+          required: true
+        },
+        title: {
+          type: String,
+          required: true
+        },
+        type: {
+          type: String,
+          enum: [
+            "Text",
+            "Texts",
+            "Number",
+            "Numbers",
+            "Date",
+            "Dates",
+            "Location",
+            "Locations"
+          ],
+          required: true
+        },
+        required: {
+          type: Boolean,
+          required: true
+        },
+        options: [
+          {
+            label: {
+              type: String,
+              required: true
+            },
+            value: {
+              type: Schema.Types.Mixed
+            }
+          }
+        ]
       }
     ],
     required: true
