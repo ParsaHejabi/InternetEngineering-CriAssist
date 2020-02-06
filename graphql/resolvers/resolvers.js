@@ -1,4 +1,4 @@
-// const Form = require("../../models/form");
+const Form = require("../../models/form");
 const {
   point,
   lineString,
@@ -7,8 +7,6 @@ const {
   featureCollection,
   area
 } = require("../schema/helper/areaData.json");
-const { form1, form2 } = require("../schema/helper/formData.json");
-const Form = require("../../models/form");
 
 const GeoJSONTypes = {
   POINT: "Point",
@@ -47,7 +45,16 @@ module.exports = {
     return args;
   },
   forms: () => {
-    return [form1, form2];
+    return Form.find()
+      .then(forms => {
+        return forms.map(form => {
+          return { ...form._doc };
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   },
   createForm: args => {
     const form = new Form({
@@ -65,16 +72,4 @@ module.exports = {
         throw err;
       });
   }
-  // forms: () => {
-  //   return Form.find()
-  //     .then(forms => {
-  //       return forms.map(form => {
-  //         return { ...form._doc };
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       throw err;
-  //     });
-  // }
 };
