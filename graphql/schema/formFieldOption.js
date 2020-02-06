@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const formFieldOptionValue = require("./formFieldOptionValue");
 
-module.exports = new graphql.GraphQLObjectType({
+const formFieldOption = new graphql.GraphQLObjectType({
   name: "FormFieldOption",
   fields: () => ({
     label: {
@@ -34,3 +34,26 @@ module.exports = new graphql.GraphQLObjectType({
     }
   })
 });
+
+const formFieldOptionInput = new graphql.GraphQLInputObjectType({
+  name: "FormFieldOptionInput",
+  fields: () => ({
+    label: {
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
+    },
+    textValue: {
+      type: formFieldOptionValue.FormFieldOptionValueTextInput
+    },
+    numberValue: {
+      type: formFieldOptionValue.FormFieldOptionValueNumberInput
+    },
+    dateValue: {
+      type: formFieldOptionValue.FormFieldOptionValueDateInput
+    },
+    pointValue: {
+      type: formFieldOptionValue.FormFieldOptionValuePointInput
+    }
+  })
+});
+
+module.exports = { formFieldOption, formFieldOptionInput };

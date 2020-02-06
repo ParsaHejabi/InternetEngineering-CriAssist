@@ -4,7 +4,7 @@ const area = require("./area");
 
 const formFieldOptionObject = require("./formFieldOption");
 const formFieldObject = require("./formField");
-const formObject = require("./form");
+const form = require("./form");
 
 const queryRootType = new graphql.GraphQLObjectType({
   name: "QueryRootType",
@@ -30,14 +30,14 @@ const queryRootType = new graphql.GraphQLObjectType({
       )
     },
     formFieldOptions: {
-      type: formFieldOptionObject
+      type: formFieldOptionObject.formFieldOption
     },
     formFields: {
       type: formFieldObject.FormField
     },
     forms: {
       type: graphql.GraphQLNonNull(
-        new graphql.GraphQLList(graphql.GraphQLNonNull(formObject))
+        new graphql.GraphQLList(graphql.GraphQLNonNull(form.formObject))
       )
     }
   })
@@ -53,9 +53,15 @@ const mutationRootType = new graphql.GraphQLObjectType({
           type: new graphql.GraphQLNonNull(area.areaInput)
         }
       }
+    },
+    createForm: {
+      type: form.formObject,
+      args: {
+        formInput: {
+          type: new graphql.GraphQLNonNull(form.formInput)
+        }
+      }
     }
-    // createForm: {
-    // }
   })
 });
 

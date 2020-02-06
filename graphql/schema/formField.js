@@ -33,7 +33,29 @@ const formField = {
       },
       options: {
         type: new graphql.GraphQLList(
-          new graphql.GraphQLNonNull(formFieldOption)
+          new graphql.GraphQLNonNull(formFieldOption.formFieldOption)
+        )
+      }
+    })
+  }),
+  FormFieldInput: new graphql.GraphQLInputObjectType({
+    name: "FormFieldInput",
+    fields: () => ({
+      name: {
+        type: new graphql.GraphQLNonNull(graphql.GraphQLString)
+      },
+      title: {
+        type: new graphql.GraphQLNonNull(graphql.GraphQLString)
+      },
+      type: {
+        type: new graphql.GraphQLNonNull(formField.FormFieldTypeEnum)
+      },
+      required: {
+        type: new graphql.GraphQLNonNull(graphql.GraphQLBoolean)
+      },
+      options: {
+        type: new graphql.GraphQLList(
+          new graphql.GraphQLNonNull(formFieldOption.formFieldOptionInput)
         )
       }
     })

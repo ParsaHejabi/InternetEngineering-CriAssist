@@ -12,7 +12,9 @@ const area = new graphql.GraphQLObjectType({
       description: "Name of the area the GeoJSON representing."
     },
     geojson: {
-      type: new graphql.GraphQLNonNull(graphqlGeoJSON.GeoJSON.FeatureCollectionObject)
+      type: new graphql.GraphQLNonNull(
+        graphqlGeoJSON.GeoJSON.FeatureCollectionObject
+      )
     }
   })
 });
@@ -28,6 +30,6 @@ const areaInput = new graphql.GraphQLInputObjectType({
       type: new graphql.GraphQLNonNull(graphqlGeoJSON.featureCollectionInput)
     }
   })
-})
+});
 
-module.exports = {area, areaInput};
+module.exports = { area, areaInput };

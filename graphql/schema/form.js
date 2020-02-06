@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const formFieldObject = require("./formField");
 
-module.exports = new graphql.GraphQLObjectType({
+const formObject = new graphql.GraphQLObjectType({
   name: "Form",
   fields: () => ({
     _id: {
@@ -12,8 +12,28 @@ module.exports = new graphql.GraphQLObjectType({
     },
     fields: {
       type: new graphql.GraphQLNonNull(
-        graphql.GraphQLList(new graphql.GraphQLNonNull(formFieldObject.FormField))
+        graphql.GraphQLList(
+          new graphql.GraphQLNonNull(formFieldObject.FormField)
+        )
       )
     }
   })
 });
+
+const formInput = new graphql.GraphQLInputObjectType({
+  name: "FormInput",
+  fields: () => ({
+    title: {
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
+    },
+    fields: {
+      type: new graphql.GraphQLNonNull(
+        graphql.GraphQLList(
+          new graphql.GraphQLNonNull(formFieldObject.FormFieldInput)
+        )
+      )
+    }
+  })
+});
+
+module.exports = { formObject, formInput };

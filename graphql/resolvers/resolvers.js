@@ -48,6 +48,10 @@ module.exports = {
   forms: () => {
     return [form1, form2];
   },
+  createForm: args => {
+    console.log(args.formInput);
+    return args;
+  }
   // forms: () => {
   //   return Form.find()
   //     .then(forms => {
