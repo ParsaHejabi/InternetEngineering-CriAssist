@@ -1,13 +1,7 @@
 const graphql = require('graphql');
+const { GraphQLJSON, GraphQLJSONObject } = require('graphql-type-json');
 
 const formAnswerObject = {
-  JsonScalar: new graphql.GraphQLScalarType({
-    name: 'JSONObject',
-    description: 'Arbitrary JSON value',
-    serialize: coerceObject,
-    parseValue: coerceObject,
-    parseLiteral: parseObject
-  }),
   formAnswerObject: new graphql.GraphQLObjectType({
     name: 'FormAnswerObject',
     fields: () => ({
@@ -18,18 +12,21 @@ const formAnswerObject = {
         type: new graphql.GraphQLNonNull(graphql.GraphQLID)
       },
       value: {
-        type: new graphql.GraphQLNonNull(formAnswerObject.JsonScalar)
+        type: new graphql.GraphQLNonNull(GraphQLJSONObject)
+      }
+    })
+  }),
+  formAnswerInput: new graphql.GraphQLInputObjectType({
+    name: 'FormAnswerInputObject',
+    fields: () => ({
+      formId: {
+        type: new graphql.GraphQLNonNull(graphql.GraphQLID)
+      },
+      value: {
+        type: new graphql.GraphQLNonNull(GraphQLJSONObject)
       }
     })
   })
 };
-
-function coerceObject(value) {
-  return JSON.parse(value);
-}
-
-function parseObject(valueAST) {
-  return JSON.stringify(valueAST.values);
-}
 
 module.exports = formAnswerObject;

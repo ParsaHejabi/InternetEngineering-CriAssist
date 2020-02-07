@@ -37,14 +37,6 @@ const GeoJSON = {
     parseLiteral: parseCoordinates
   }),
 
-  JsonScalar: new ScalarType({
-    name: 'JSONObject',
-    description: 'Arbitrary JSON value',
-    serialize: coerceObject,
-    parseValue: coerceObject,
-    parseLiteral: parseObject
-  }),
-
   PointObject: new ObjectType({
     name: 'GeoJSONPoint',
     description: 'Object describing a single geographical point.',
@@ -241,14 +233,6 @@ function coerceCoordinates(value) {
 
 function parseCoordinates(valueAST) {
   return valueAST.values;
-}
-
-function coerceObject(value) {
-  return JSON.parse(value);
-}
-
-function parseObject(valueAST) {
-  return JSON.stringify(valueAST.value);
 }
 
 const featureCollectionInput = new InputType({

@@ -56,6 +56,26 @@ const queryRootType = new graphql.GraphQLObjectType({
           graphql.GraphQLNonNull(formAnswer.formAnswerObject)
         )
       )
+    },
+    formAnswer: {
+      type: graphql.GraphQLNonNull(formAnswer.formAnswerObject),
+      args: {
+        _id: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLID)
+        }
+      }
+    },
+    formAnswersWithGivenFormId: {
+      type: graphql.GraphQLNonNull(
+        new graphql.GraphQLList(
+          graphql.GraphQLNonNull(formAnswer.formAnswerObject)
+        )
+      ),
+      args: {
+        formId: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLID)
+        }
+      }
     }
   })
 });
@@ -76,6 +96,14 @@ const mutationRootType = new graphql.GraphQLObjectType({
       args: {
         formInput: {
           type: new graphql.GraphQLNonNull(form.formInput)
+        }
+      }
+    },
+    createFormAnswer: {
+      type: formAnswer.formAnswerObject,
+      args: {
+        formAnswerInput: {
+          type: new graphql.GraphQLNonNull(formAnswer.formAnswerInput)
         }
       }
     }

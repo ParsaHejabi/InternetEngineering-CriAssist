@@ -1,4 +1,5 @@
 const Form = require('../../models/form');
+const FormAnswer = require('../../models/formAnswer');
 const {
   point,
   lineString,
@@ -64,6 +65,19 @@ module.exports = {
         throw err;
       });
   },
+  form: args => {
+    return Form.findById(args._id)
+      .then(form => {
+        if (!form) {
+          throw new Error('There is no form with given id.');
+        }
+        return { ...form._doc };
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+  },
   createForm: args => {
     const form = new Form({
       title: args.formInput.title,
@@ -80,13 +94,63 @@ module.exports = {
         throw err;
       });
   },
-  form: args => {
-    return Form.findById(args._id)
+  formAnswers: () => {
+    return FormAnswer.find()
+      .then(formAnswers => {
+        return formAnswers.map(formAnswer => {
+          return { ...formAnswer._doc };
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+  },
+  formAnswer: args => {
+    return FormAnswer.findById(args._id)
+      .then(formAnswer => {
+        if (!formAnswer) {
+          throw new Error('There is no formAnswer with given id.');
+        }
+        return { ...formAnswer._doc };
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+  },
+  formAnswersWithGivenFormId: args => {
+    return FormAnswer.find()
+      .where('formId')
+      .equals(args.formId)
+      .then(formAnswers => {
+        if (formAnswers.length === 0) {
+          throw new Error('There is no form with given formId.');
+        }
+        return formAnswers.map(formAnswer => {
+          return { ...formAnswer._doc };
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+  },
+  createFormAnswer: args => {
+    const formAnswer = new FormAnswer({
+      formId: args.formAnswerInput.formId,
+      value: args.formAnswerInput.value
+    });
+    return Form.findById(formAnswer.formId)
       .then(form => {
         if (!form) {
           throw new Error('There is no form with given id.');
         }
-        return { ...form._doc };
+        return formAnswer.save();
+      })
+      .then(result => {
+        console.log(result);
+        return { ...result._doc };
       })
       .catch(err => {
         console.log(err);
