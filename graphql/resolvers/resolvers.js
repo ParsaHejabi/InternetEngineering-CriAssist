@@ -79,5 +79,18 @@ module.exports = {
         console.log(err);
         throw err;
       });
+  },
+  form: args => {
+    return Form.findById(args._id)
+      .then(form => {
+        if (!form) {
+          throw new Error('There is no form with given id.');
+        }
+        return { ...form._doc };
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   }
 };

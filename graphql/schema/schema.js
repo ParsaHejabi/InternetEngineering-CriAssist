@@ -42,6 +42,14 @@ const queryRootType = new graphql.GraphQLObjectType({
         new graphql.GraphQLList(graphql.GraphQLNonNull(form.formObject))
       )
     },
+    form: {
+      type: graphql.GraphQLNonNull(form.formObject),
+      args: {
+        _id: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLID)
+        }
+      }
+    },
     formAnswers: {
       type: graphql.GraphQLNonNull(
         new graphql.GraphQLList(
