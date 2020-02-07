@@ -1,13 +1,15 @@
-const graphql = require("graphql");
-const { GeoJSON } = require("./geoJSON");
-const area = require("./area");
+const graphql = require('graphql');
+const { GeoJSON } = require('./geoJSON');
+const area = require('./area');
 
-const formFieldOptionObject = require("./formFieldOption");
-const formFieldObject = require("./formField");
-const form = require("./form");
+const formFieldOptionObject = require('./formFieldOption');
+const formFieldObject = require('./formField');
+const form = require('./form');
+
+const formAnswer = require('./formAnswer');
 
 const queryRootType = new graphql.GraphQLObjectType({
-  name: "QueryRootType",
+  name: 'QueryRootType',
   fields: () => ({
     points: {
       type: GeoJSON.PointObject
@@ -39,12 +41,19 @@ const queryRootType = new graphql.GraphQLObjectType({
       type: graphql.GraphQLNonNull(
         new graphql.GraphQLList(graphql.GraphQLNonNull(form.formObject))
       )
+    },
+    formAnswers: {
+      type: graphql.GraphQLNonNull(
+        new graphql.GraphQLList(
+          graphql.GraphQLNonNull(formAnswer.formAnswerObject)
+        )
+      )
     }
   })
 });
 
 const mutationRootType = new graphql.GraphQLObjectType({
-  name: "MutationRootType",
+  name: 'MutationRootType',
   fields: () => ({
     createArea: {
       type: area.area,

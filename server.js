@@ -1,12 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const graphqlHTTP = require("express-graphql");
-const path = require("path");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const express = require('express');
+const bodyParser = require('body-parser');
+const graphqlHTTP = require('express-graphql');
+const path = require('path');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
-const graphQlSchema = require("./graphql/schema/schema");
-const graphQlResolvers = require("./graphql/resolvers/resolvers");
+const graphQlSchema = require('./graphql/schema/schema');
+const graphQlResolvers = require('./graphql/resolvers/resolvers');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,7 +17,7 @@ app.use(cors());
 // Configure graphql
 app.use(bodyParser.json());
 app.use(
-  "/graphql",
+  '/graphql',
   graphqlHTTP({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
@@ -26,17 +26,17 @@ app.use(
 );
 
 // Configure for Heroku
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("criassist-frontend/criassist-frontend/build"));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('criassist-frontend/criassist-frontend/build'));
 
-  app.get("*", (req, res) => {
+  app.get('*', (req, res) => {
     res.sendFile(
       path.join(
         __dirname,
-        "criassist-frontend",
-        "criassist-frontend",
-        "build",
-        "index.html"
+        'criassist-frontend',
+        'criassist-frontend',
+        'build',
+        'index.html'
       )
     );
   });

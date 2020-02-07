@@ -1,4 +1,4 @@
-// const mongoose = require("mongoose");
+// const mongoose = require('mongoose');
 
 // const Schema = mongoose.Schema;
 
@@ -13,7 +13,16 @@
 //   },
 //   type: {
 //     type: String,
-//     enum: ['Text', 'Texts', 'Number', 'Numbers', 'Date', 'Dates', 'Location', 'Locations'],
+//     enum: [
+//       'Text',
+//       'Texts',
+//       'Number',
+//       'Numbers',
+//       'Date',
+//       'Dates',
+//       'Location',
+//       'Locations'
+//     ],
 //     required: true
 //   },
 //   required: {
@@ -33,4 +42,4 @@
 //   ]
 // });
 
-// module.exports = mongoose.model("FormField", formFieldSchema);
+// module.exports = mongoose.model('FormField', formFieldSchema);

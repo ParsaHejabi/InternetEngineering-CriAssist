@@ -1,15 +1,15 @@
-const graphql = require("graphql");
-const formFieldOptionValue = require("./formFieldOptionValue");
+const graphql = require('graphql');
+const formFieldOptionValue = require('./formFieldOptionValue');
 
 const formFieldOption = new graphql.GraphQLObjectType({
-  name: "FormFieldOption",
+  name: 'FormFieldOption',
   fields: () => ({
     label: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     },
     value: {
       type: new graphql.GraphQLUnionType({
-        name: "formFieldOptionValueProperties",
+        name: 'formFieldOptionValueProperties',
         types: [
           formFieldOptionValue.FormFieldOptionValueText,
           formFieldOptionValue.FormFieldOptionValueNumber,
@@ -36,7 +36,7 @@ const formFieldOption = new graphql.GraphQLObjectType({
 });
 
 const formFieldOptionInput = new graphql.GraphQLInputObjectType({
-  name: "FormFieldOptionInput",
+  name: 'FormFieldOptionInput',
   fields: () => ({
     label: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString)
@@ -44,7 +44,7 @@ const formFieldOptionInput = new graphql.GraphQLInputObjectType({
     value: {
       type: new graphql.GraphQLNonNull(
         new graphql.GraphQLInputObjectType({
-          name: "FormFieldOptionValueInput",
+          name: 'FormFieldOptionValueInput',
           fields: () => ({
             textValue: {
               type: graphql.GraphQLString
@@ -57,7 +57,7 @@ const formFieldOptionInput = new graphql.GraphQLInputObjectType({
             },
             pointValue: {
               type: new graphql.GraphQLInputObjectType({
-                name: "FormFieldOptionValuePointInput",
+                name: 'FormFieldOptionValuePointInput',
                 fields: () => ({
                   lat: {
                     type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)

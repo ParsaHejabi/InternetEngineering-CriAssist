@@ -1,8 +1,8 @@
-const graphql = require("graphql");
+const graphql = require('graphql');
 
 const formFieldOptionValue = {
   FormFieldOptionValuePoint: new graphql.GraphQLObjectType({
-    name: "FormFieldOptionValuePoint",
+    name: 'FormFieldOptionValuePoint',
     fields: () => ({
       lat: {
         type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
@@ -13,7 +13,7 @@ const formFieldOptionValue = {
     })
   }),
   FormFieldOptionValueText: new graphql.GraphQLObjectType({
-    name: "FormFieldOptionValueText",
+    name: 'FormFieldOptionValueText',
     fields: () => ({
       textValue: {
         type: graphql.GraphQLNonNull(graphql.GraphQLString)
@@ -21,7 +21,7 @@ const formFieldOptionValue = {
     })
   }),
   FormFieldOptionValueNumber: new graphql.GraphQLObjectType({
-    name: "FormFieldOptionValueNumber",
+    name: 'FormFieldOptionValueNumber',
     fields: () => ({
       numberValue: {
         type: graphql.GraphQLNonNull(graphql.GraphQLFloat)
@@ -29,7 +29,7 @@ const formFieldOptionValue = {
     })
   }),
   FormFieldOptionValueDate: new graphql.GraphQLObjectType({
-    name: "FormFieldOptionValueDate",
+    name: 'FormFieldOptionValueDate',
     fields: () => ({
       dateValue: {
         type: graphql.GraphQLNonNull(graphql.GraphQLString)

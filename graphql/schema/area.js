@@ -1,15 +1,15 @@
-const graphql = require("graphql");
-const graphqlGeoJSON = require("./geoJSON");
+const graphql = require('graphql');
+const graphqlGeoJSON = require('./geoJSON');
 
 const area = new graphql.GraphQLObjectType({
-  name: "Area",
+  name: 'Area',
   fields: () => ({
     _id: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLID)
     },
     name: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString),
-      description: "Name of the area the GeoJSON representing."
+      description: 'Name of the area the GeoJSON representing.'
     },
     geojson: {
       type: new graphql.GraphQLNonNull(
@@ -20,11 +20,11 @@ const area = new graphql.GraphQLObjectType({
 });
 
 const areaInput = new graphql.GraphQLInputObjectType({
-  name: "AreaInput",
+  name: 'AreaInput',
   fields: () => ({
     name: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString),
-      description: "Name of the area the GeoJSON representing."
+      description: 'Name of the area the GeoJSON representing.'
     },
     geojson: {
       type: new graphql.GraphQLNonNull(graphqlGeoJSON.featureCollectionInput)

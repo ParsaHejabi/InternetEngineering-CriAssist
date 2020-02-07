@@ -1,4 +1,4 @@
-const Form = require("../../models/form");
+const Form = require('../../models/form');
 const {
   point,
   lineString,
@@ -6,17 +6,17 @@ const {
   feature,
   featureCollection,
   area
-} = require("../schema/helper/areaData.json");
+} = require('../schema/helper/areaData.json');
 
 const GeoJSONTypes = {
-  POINT: "Point",
-  LINESTRING: "LineString",
-  POLYGON: "Polygon",
-  MULTIPOINT: "MultiPoint",
-  MULTILINESTRING: "MultiLineString",
-  MULTIPOLYGON: "MultiPolygon",
-  FEATURE: "Feature",
-  FEATURECOLLECTION: "FeatureCollection"
+  POINT: 'Point',
+  LINESTRING: 'LineString',
+  POLYGON: 'Polygon',
+  MULTIPOINT: 'MultiPoint',
+  MULTILINESTRING: 'MultiLineString',
+  MULTIPOLYGON: 'MultiPolygon',
+  FEATURE: 'Feature',
+  FEATURECOLLECTION: 'FeatureCollection'
 };
 
 module.exports = {
@@ -39,6 +39,14 @@ module.exports = {
     return [area];
   },
   createArea: args => {
+    // return Area.findOne({ name: args.areaInput.name }).then(
+    //   area => {
+    //     if (area) {
+    //       throw new Error('An area with this name exists already.');
+    //     }
+    //     return area;
+    //   }
+    // )
     console.log(args.areaInput);
     console.log(args.areaInput.geojson);
     console.log(args.areaInput.geojson.features[0].geometry);

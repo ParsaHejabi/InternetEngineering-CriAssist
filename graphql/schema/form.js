@@ -1,8 +1,8 @@
-const graphql = require("graphql");
-const formFieldObject = require("./formField");
+const graphql = require('graphql');
+const formFieldObject = require('./formField');
 
 const formObject = new graphql.GraphQLObjectType({
-  name: "Form",
+  name: 'Form',
   fields: () => ({
     _id: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLID)
@@ -21,7 +21,7 @@ const formObject = new graphql.GraphQLObjectType({
 });
 
 const formInput = new graphql.GraphQLInputObjectType({
-  name: "FormInput",
+  name: 'FormInput',
   fields: () => ({
     title: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString)
