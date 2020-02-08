@@ -1,5 +1,6 @@
 const Form = require('../../models/form');
 const FormAnswer = require('../../models/formAnswer');
+const Area = require('../../models/area');
 const {
   point,
   lineString,
@@ -37,21 +38,37 @@ module.exports = {
     return featureCollection;
   },
   areas: () => {
-    return [area];
+    return Area.find()
+      .then(areas => {
+        return areas.map(area => {
+          return { ...area._doc };
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   },
   createArea: args => {
-    // return Area.findOne({ name: args.areaInput.name }).then(
-    //   area => {
-    //     if (area) {
-    //       throw new Error('An area with this name exists already.');
-    //     }
-    //     return area;
-    //   }
-    // )
-    console.log(args.areaInput);
-    console.log(args.areaInput.geojson);
-    console.log(args.areaInput.geojson.features[0].geometry);
-    return args;
+    const area = new Area({
+      name: args.areaInput.name,
+      geojson: args.areaInput.geojson
+    });
+    return Area.findOne({ name: area.name })
+      .then(duplicateArea => {
+        if (duplicateArea) {
+          throw new Error('An area with this name exists already.');
+        }
+        return area.save();
+      })
+      .then(result => {
+        console.log(result);
+        return { ...result._doc };
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   },
   forms: () => {
     return Form.find()
@@ -87,7 +104,7 @@ module.exports = {
       .save()
       .then(result => {
         console.log(result);
-        return { ...form._doc };
+        return { ...result._doc };
       })
       .catch(err => {
         console.log(err);

@@ -232,7 +232,25 @@ function coerceCoordinates(value) {
 }
 
 function parseCoordinates(valueAST) {
-  return valueAST.values;
+  const newValues = valueAST.values.map(value => {
+    if (value.kind === 'FloatValue') {
+      return value.value;
+    } else if (value.kind === 'ListValue') {
+      return value.values.map(oneLevelValue => {
+        if (oneLevelValue.kind === 'FloatValue') {
+          return oneLevelValue.value;
+        } else if (oneLevelValue.kind === 'ListValue') {
+          return oneLevelValue.values.map(twoLevelValue => {
+            if (twoLevelValue.kind === 'FloatValue') {
+              return twoLevelValue.value;
+            }
+          });
+        }
+      });
+    }
+  });
+  // console.log(newValues);
+  return newValues;
 }
 
 const featureCollectionInput = new InputType({
