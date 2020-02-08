@@ -3,42 +3,8 @@ const FormAnswer = require('../../models/formAnswer');
 const Area = require('../../models/area');
 const { point: turfPoint, polygon: turfPolygon } = require('turf');
 const booleanPointInPolygon = require('@turf/boolean-point-in-polygon');
-// const {
-//   point,
-//   lineString,
-//   polygon,
-//   feature,
-//   featureCollection,
-//   area
-// } = require('../schema/helper/areaData.json');
-
-// const GeoJSONTypes = {
-//   POINT: 'Point',
-//   LINESTRING: 'LineString',
-//   POLYGON: 'Polygon',
-//   MULTIPOINT: 'MultiPoint',
-//   MULTILINESTRING: 'MultiLineString',
-//   MULTIPOLYGON: 'MultiPolygon',
-//   FEATURE: 'Feature',
-//   FEATURECOLLECTION: 'FeatureCollection'
-// };
 
 module.exports = {
-  points: () => {
-    return point;
-  },
-  lineStrings: () => {
-    return lineString;
-  },
-  polygons: () => {
-    return polygon;
-  },
-  features: () => {
-    return feature;
-  },
-  featureCollections: () => {
-    return featureCollection;
-  },
   areas: () => {
     return Area.find()
       .then(areas => {
