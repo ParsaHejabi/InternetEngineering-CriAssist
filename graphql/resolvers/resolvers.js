@@ -1,25 +1,27 @@
 const Form = require('../../models/form');
 const FormAnswer = require('../../models/formAnswer');
 const Area = require('../../models/area');
-const {
-  point,
-  lineString,
-  polygon,
-  feature,
-  featureCollection,
-  area
-} = require('../schema/helper/areaData.json');
+const { point: turfPoint, polygon: turfPolygon } = require('turf');
+const booleanPointInPolygon = require('@turf/boolean-point-in-polygon');
+// const {
+//   point,
+//   lineString,
+//   polygon,
+//   feature,
+//   featureCollection,
+//   area
+// } = require('../schema/helper/areaData.json');
 
-const GeoJSONTypes = {
-  POINT: 'Point',
-  LINESTRING: 'LineString',
-  POLYGON: 'Polygon',
-  MULTIPOINT: 'MultiPoint',
-  MULTILINESTRING: 'MultiLineString',
-  MULTIPOLYGON: 'MultiPolygon',
-  FEATURE: 'Feature',
-  FEATURECOLLECTION: 'FeatureCollection'
-};
+// const GeoJSONTypes = {
+//   POINT: 'Point',
+//   LINESTRING: 'LineString',
+//   POLYGON: 'Polygon',
+//   MULTIPOINT: 'MultiPoint',
+//   MULTILINESTRING: 'MultiLineString',
+//   MULTIPOLYGON: 'MultiPolygon',
+//   FEATURE: 'Feature',
+//   FEATURECOLLECTION: 'FeatureCollection'
+// };
 
 module.exports = {
   points: () => {
@@ -168,6 +170,31 @@ module.exports = {
       .then(result => {
         console.log(result);
         return { ...result._doc };
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+  },
+  areaNamesOfGivenPoint: args => {
+    const result = [];
+    const point = turfPoint([args.lat, args.long]);
+    return Area.find(
+      {
+        'geojson.features.geometry.type': 'Polygon'
+      },
+      'geojson.features.geometry.coordinates name'
+    )
+      .then(areas => {
+        areas.map(area => {
+          area.geojson.features.map(feature => {
+            const polygon = turfPolygon(feature.geometry.coordinates);
+            if (booleanPointInPolygon.default(point, polygon)) {
+              result.push(area.name);
+            }
+          });
+        });
+        return result;
       })
       .catch(err => {
         console.log(err);

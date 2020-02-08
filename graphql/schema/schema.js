@@ -76,6 +76,19 @@ const queryRootType = new graphql.GraphQLObjectType({
           type: new graphql.GraphQLNonNull(graphql.GraphQLID)
         }
       }
+    },
+    areaNamesOfGivenPoint: {
+      type: graphql.GraphQLNonNull(
+        new graphql.GraphQLList(graphql.GraphQLNonNull(graphql.GraphQLString))
+      ),
+      args: {
+        lat: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+        },
+        long: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+        }
+      }
     }
   })
 });

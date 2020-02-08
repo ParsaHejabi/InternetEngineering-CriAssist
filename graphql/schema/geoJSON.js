@@ -234,15 +234,15 @@ function coerceCoordinates(value) {
 function parseCoordinates(valueAST) {
   const newValues = valueAST.values.map(value => {
     if (value.kind === 'FloatValue') {
-      return value.value;
+      return parseFloat(value.value);
     } else if (value.kind === 'ListValue') {
       return value.values.map(oneLevelValue => {
         if (oneLevelValue.kind === 'FloatValue') {
-          return oneLevelValue.value;
+          return parseFloat(oneLevelValue.value);
         } else if (oneLevelValue.kind === 'ListValue') {
           return oneLevelValue.values.map(twoLevelValue => {
             if (twoLevelValue.kind === 'FloatValue') {
-              return twoLevelValue.value;
+              return parseFloat(twoLevelValue.value);
             }
           });
         }
