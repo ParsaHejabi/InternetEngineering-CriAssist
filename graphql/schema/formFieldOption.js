@@ -26,7 +26,7 @@ const formFieldOption = new graphql.GraphQLObjectType({
           if (value.dateValue) {
             return formFieldOptionValue.FormFieldOptionValueDate;
           }
-          if (value.lat) {
+          if (value.pointValue) {
             return formFieldOptionValue.FormFieldOptionValuePoint;
           }
         }

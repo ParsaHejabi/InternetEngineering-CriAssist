@@ -4,11 +4,20 @@ const formFieldOptionValue = {
   FormFieldOptionValuePoint: new graphql.GraphQLObjectType({
     name: 'FormFieldOptionValuePoint',
     fields: () => ({
-      lat: {
-        type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
-      },
-      long: {
-        type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+      pointValue: {
+        type: graphql.GraphQLNonNull(
+          new graphql.GraphQLObjectType({
+            name: 'FormFieldOptionValuePointObject',
+            fields: () => ({
+              lat: {
+                type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+              },
+              long: {
+                type: new graphql.GraphQLNonNull(graphql.GraphQLFloat)
+              }
+            })
+          })
+        )
       }
     })
   }),
