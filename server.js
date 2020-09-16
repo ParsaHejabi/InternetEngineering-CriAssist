@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const graphqlHTTP = require('express-graphql');
+const { graphqlHTTP } = require('express-graphql');
 const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
