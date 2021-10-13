@@ -1,6 +1,6 @@
 [submodule "criassist-mobile"]
 	path = criassist-mobile
-	url = https://gitlab.com/criassist/criassist-mobile.git
+	url = git@github.com:ParsaHejabi/InternetEngineering-CriAssist-Mobile.git
 [submodule "criassist-frontend"]
 	path = criassist-frontend
-	url = https://gitlab.com/criassist/criassist-frontend.git
+	url = git@github.com:ParsaHejabi/InternetEngineering-CriAssist-FrontEnd.git
